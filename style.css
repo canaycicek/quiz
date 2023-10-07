@@ -6,6 +6,9 @@ body{
     position: relative;
     overflow: hidden;
 }
+li{
+    list-style-type: none;
+}
 .titleQuiz{
     font-weight: bold;
     display: flex;
@@ -19,7 +22,7 @@ body{
     opacity: 0;
     pointer-events: none;
 }
-.card{
+.quiz_box, .girisCard{
     background-color: rgb(88, 88, 88);
     color: rgb(255, 255, 255);
 }
@@ -111,4 +114,38 @@ body{
 }
 .passRight{
     font-style: italic;
+}
+.cont_result .card-head{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.cont_result .card-body{
+    display: flex;
+    flex-direction: column;
+    row-gap: 4rem;
+    text-align: center;
+}
+.cont_result .card-head h1{
+    font-weight: bold;
+    font-size: 3rem;
+}
+.statu_quiz{
+    font-size: 4rem;
+}
+.cont_result ul{
+    display: flex;
+    row-gap: 1rem;
+}
+.cont_result ul li{
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 10px;
+    font-size: 1.5rem;
+}
+.success_result{
+    background-color: #abf5a4;
+}
+.failed_result{
+    background-color: rgb(255, 138, 138);
 }

@@ -38,7 +38,3 @@ UI.prototype.soruSayisiniGoster = function(soruSirasi, toplamSoru) {
     document.querySelector(".quiz_box .question_index").innerHTML = tag
 }
 
-UI.prototype.kalanPassSayi = function (kalanHak) {
-    let right = `Right of Pass : ${kalanHak}`
-    document.querySelector(".card-footer .passRight").innerHTML = right
-}
