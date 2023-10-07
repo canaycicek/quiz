@@ -149,3 +149,7 @@ li{
 .failed_result{
     background-color: rgb(255, 138, 138);
 }
+
+.delete_result{
+    display: none;
+}

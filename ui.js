@@ -8,7 +8,7 @@ function UI() {
     this.btn_skip = document.querySelector(".btn_skip")
     this.wrong_skip = document.querySelector(".wrongSkip")
     this.giris = document.querySelector(".giris")
-    this.pass_right = document.querySelector("passRight")
+    this.cont_result = document.querySelector(".cont_result")
 }
 
 UI.prototype.soruGoster = function(soru) {
@@ -36,5 +36,18 @@ UI.prototype.soruGoster = function(soru) {
 UI.prototype.soruSayisiniGoster = function(soruSirasi, toplamSoru) {
     let tag = `<span class="badge bg-warning">${soruSirasi} / ${toplamSoru}</span>`
     document.querySelector(".quiz_box .question_index").innerHTML = tag
+}
+
+UI.prototype.updateResultElement = function () {
+    document.querySelector(".result").innerHTML = `
+        <h1>Results</h1>
+        <ul class="list-group">
+          <li>True : ${quiz.dogruCevapSayisi}</li>
+          <li>False : ${quiz.yanlisCevapSayisi}</li>
+          <li>Empty : ${quiz.bosCevapSayisi}</li>
+          <li>Point : ${quiz.dogruCevapSayisi * 20}</li>
+          <li>Success Status : ${quiz.successStatus}</li>
+        </ul>
+    `
 }
 

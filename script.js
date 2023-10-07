@@ -14,7 +14,9 @@ ui.nextBtn.addEventListener("click", function () {
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
   } else {
-    console.log("quiz bitti");
+    ui.quizBox.classList.add("dissplayedWrong")
+    ui.giris.style = "display : none"
+    ui.cont_result.classList.remove("delete_result")
   }
   ui.nextBtn.classList.add("dissplayed");
   ui.btn_skip.classList.remove("dissplaySkipBtn");
@@ -41,6 +43,8 @@ ui.btn_skip.addEventListener("click", function () {
       quiz.soruIndex += 1;
       ui.soruGoster(quiz.soruGetir());
       ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
+      
+      console.log(quiz.bosCevapSayisi += 1);
     } else {
       ui.wrong_skip.classList.remove("dissplayedWrong");
       setTimeout(() => {
@@ -48,27 +52,52 @@ ui.btn_skip.addEventListener("click", function () {
       }, 2000);
     }
   } else {
-    console.log("quiz bitti");
+    ui.quizBox.classList.add("dissplayedWrong")
+    ui.giris.style = "display : none"
   }
+
+  ui.updateResultElement()
 });
 
 function optionSelected(option) {
   let cevap = option.querySelector("span b").textContent;
   let soru = quiz.soruGetir();
-
   if (soru.cevabiKontrolEt(cevap)) {
     option.classList.remove("incorrect");
     option.classList.add("correct");
     option.insertAdjacentHTML("beforeend", ui.correctIcon);
+    quiz.dogruCevapSayisi += 1
+    
   } else {
     option.classList.remove("correct");
     option.classList.add("incorrect");
     option.insertAdjacentHTML("beforeend", ui.incorrectIcon);
+    quiz.yanlisCevapSayisi += 1
   }
 
   for (let i = 0; i < ui.option_list.children.length; i++) {
     ui.option_list.children[i].classList.add("disabled");
   }
+  if((quiz.dogruCevapSayisi * 20) < 50){
+    quiz.successStatus = "Unsuccess"
+  }else{
+    quiz.successStatus = "Success"
+  }
+  ui.updateResultElement()
+
+  if(quiz.successStatus == "Success"){
+    document.querySelector(".unSuccessMessage").classList.add("dissplayedWrong")
+    document.querySelector(".successMessage").classList.remove("dissplayedWrong")
+    document.querySelector(".themeSelect").classList.add("success_result")
+    document.querySelector(".themeSelect").classList.remove("failed_result")
+  }else{
+    document.querySelector(".successMessage").classList.add("dissplayedWrong")
+    document.querySelector(".unSuccessMessage").classList.remove("dissplayedWrong")
+    document.querySelector(".themeSelect").classList.add("failed_result")
+    document.querySelector(".themeSelect").classList.remove("success_result")
+  }
+
   ui.btn_skip.classList.add("dissplaySkipBtn");
   ui.nextBtn.classList.remove("dissplayed");
 }
+

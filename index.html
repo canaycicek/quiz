@@ -15,7 +15,7 @@
     <title>Quiz</title>
   </head>
   <body>
-    <div class="container my-4 giris dissplayedWrong">
+    <div class="container my-4 giris">
       <div class="row">
         <div class="col-12">
           <div class="card girisCard">
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="card quiz_box dissplayedWrong">
+    <div class="card quiz_box">
       <header class="card-header">
         <div class="title">Quiz App</div>
       </header>
@@ -83,45 +83,35 @@
     </div>
     <div class="wrongSkip dissplayedWrong">Your right to pass has expired.</div>
 
-    <div class="container mt-5 cont_result ">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body mb-5">
+    <div class="container mt-5 cont_result delete_result">
+      <div class="row">
+        <div class="col-12">
+          <div class="card themeSelect">
+            <div class="card-body mb-5">
+              <div class="card-head">
+                <i class="fa-solid fa-medal fa-10x"></i>
+                <h1>Congratulations You Finished the Quiz</h1>
+                <i class="fa-solid fa-medal fa-10x"></i>
+              </div>
 
-                        <div class="card-head">
-                            <i class="fa-solid fa-medal fa-10x"></i>
-                            <h1>Congratulations You Finished the Quiz</h1>
-                            <i class="fa-solid fa-medal fa-10x"></i>
-                        </div>
-                        
-                        <div class="result">
-                            <h1>Results</h1>
-                            <ul class="list-group">
-                                <li>True : 3</li>
-                                <li>False : 1</li>
-                                <li>Empty : 1</li>
-                                <li>Point : 60</li>
-                                <li>Success Status : Successful</li>
-                            </ul>
-                        </div>
+              <div class="result">
+              </div>
 
-                        <div class="statu_quiz">
-                            <div class="">
-                                <i class="fa-regular fa-circle-check"></i>
-                                <span class="success_quiz">You Passed the Quiz</span>
-                            </div>
-                            <div class="dissplayedWrong">
-                                <i class="fa-regular fa-circle-xmark"></i>
-                                <span class="success_quiz">You Failed the Quiz</span>
-                            </div>
-                        </div>
-                    </div>
+              <div class="statu_quiz">
+                <div class="successMessage">
+                  <i class="fa-regular fa-circle-check"></i>
+                  <span class="success_quiz">You Passed the Quiz</span>
                 </div>
+                <div class="unSuccessMessage">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  <span class="success_quiz">You Failed the Quiz</span>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="soru.js"></script>
