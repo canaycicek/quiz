@@ -5,10 +5,11 @@ function UI() {
     this.option_list = document.querySelector(".option_list"),
     this.correctIcon = '<div class="icon"><i class="fas fa-check"></i></div>',
     this.incorrectIcon = '<div class="icon"><i class="fas fa-times"></i></div>',
-    this.btn_skip = document.querySelector(".btn_skip")
-    this.wrong_skip = document.querySelector(".wrongSkip")
-    this.giris = document.querySelector(".giris")
+    this.btn_skip = document.querySelector(".btn_skip"),
+    this.wrong_skip = document.querySelector(".wrongSkip"),
+    this.giris = document.querySelector(".giris"),
     this.contResult = document.querySelector(".contResult")
+    this.timeCount = document.querySelector(".timer")
 }
 
 UI.prototype.soruGoster = function(soru) {
@@ -51,3 +52,11 @@ UI.prototype.updateResultElement = function () {
     `
 }
 
+UI.prototype.ready = function () {
+    var progressBar = document.querySelector(".prgressBar")
+    var duration = 10000;
+  
+    progressBar.animate({ width: '100%' }, duration, function() {
+        
+    });
+}

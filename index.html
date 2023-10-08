@@ -66,8 +66,20 @@
       <header class="card-header">
         <div class="title">Quiz App</div>
       </header>
-      <section class="card-body">
+      <section class="card-body bodyHead">
         <div class="question_text"></div>
+        <div class="progress">
+          <div
+            class="prgressBar progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width: 0%"
+          ></div>
+        </div>
+        <div class="timer mt-3 bg-warning">10</div>
+
         <div class="option_list"></div>
       </section>
       <footer class="card-footer">
@@ -94,8 +106,7 @@
                 <i class="fa-solid fa-medal fa-10x"></i>
               </div>
 
-              <div class="result">
-              </div>
+              <div class="result"></div>
 
               <div class="statu_quiz">
                 <div class="successMessage">

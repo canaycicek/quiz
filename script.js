@@ -3,18 +3,23 @@ const ui = new UI();
 
 ui.startBtn.addEventListener("click", function () {
   ui.quizBox.classList.add("active");
+  startTimer(9)
   ui.soruGoster(quiz.soruGetir());
   ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
   ui.giris.classList.add("girisDiss");
+  ui.ready()
 });
 
 ui.nextBtn.addEventListener("click", function () {
-
   if (quiz.sorular.length != quiz.soruIndex + 1) {
     quiz.soruIndex += 1;
+    clearInterval(counter)
+    startTimer(10)
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
+    ui.ready()
   } else {
+    clearInterval(counter)
     ui.quizBox.classList.add("dissplayedWrong")
     ui.giris.style = "display : none"
     ui.contResult.classList.remove("deleteResult")
@@ -33,12 +38,14 @@ document.querySelector(".card-footer .passRight").innerHTML = right;
 ui.btn_skip.addEventListener("click", function () {
   
   if (quiz.sorular.length != quiz.soruIndex + 1) {
+    clearInterval(counter)
+    startTimer(10)
     skipCount++;
     if (skipCount <= 2) {
       quiz.soruIndex += 1;
       ui.soruGoster(quiz.soruGetir());
       ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
-      
+      ui.ready()
       quiz.bosCevapSayisi += 1;
     } else {
       ui.wrong_skip.classList.remove("dissplayedWrong");
@@ -53,6 +60,8 @@ ui.btn_skip.addEventListener("click", function () {
         ui.wrong_skip.classList.add("dissplayedWrong");
       }, 2000);
     }else{
+      clearInterval(counter)
+      startTimer(10)
       ui.quizBox.classList.add("dissplayedWrong")
       ui.giris.style = "display : none"
       ui.contResult.classList.remove("deleteResult")
@@ -72,6 +81,8 @@ ui.btn_skip.addEventListener("click", function () {
 
 
 function optionSelected(option) {
+  clearInterval(counter)
+  document.querySelector(".prgressBar").style = "width : 0px!important;"
   let cevap = option.querySelector("span b").textContent;
   let soru = quiz.soruGetir();
   if (soru.cevabiKontrolEt(cevap)) {
@@ -108,7 +119,34 @@ function optionSelected(option) {
     document.querySelector(".themeSelect").classList.add("failed_result")
     document.querySelector(".themeSelect").classList.remove("success_result")
   }
-
   ui.btn_skip.classList.add("dissplaySkipBtn");
   ui.nextBtn.classList.remove("dissplayed");
+}
+
+let counter;
+function startTimer(time) {
+  counter = setInterval(timer, 1000);
+
+  function timer() {
+    ui.timeCount.textContent = time;
+    time--;
+
+    if(time < 0){
+      clearInterval(counter)
+
+      let cevap = quiz.soruGetir().dogruCevap
+
+      for (let option of ui.option_list.children) {
+        if(option.querySelector("span b").textContent == cevap){
+          option.classList.remove("incorrect");
+          option.classList.add("correct");
+          option.insertAdjacentHTML("beforeend", ui.correctIcon);
+          ui.btn_skip.classList.add("dissplaySkipBtn");
+          ui.nextBtn.classList.remove("dissplayed");
+          quiz.bosCevapSayisi += 1;
+          option.classList.add("diabled")
+        }
+      }
+    }
+  }
 }
