@@ -9,6 +9,7 @@ ui.startBtn.addEventListener("click", function () {
 });
 
 ui.nextBtn.addEventListener("click", function () {
+
   if (quiz.sorular.length != quiz.soruIndex + 1) {
     quiz.soruIndex += 1;
     ui.soruGoster(quiz.soruGetir());
@@ -16,7 +17,7 @@ ui.nextBtn.addEventListener("click", function () {
   } else {
     ui.quizBox.classList.add("dissplayedWrong")
     ui.giris.style = "display : none"
-    ui.cont_result.classList.remove("delete_result")
+    ui.contResult.classList.remove("deleteResult")
   }
   ui.nextBtn.classList.add("dissplayed");
   ui.btn_skip.classList.remove("dissplaySkipBtn");
@@ -28,15 +29,9 @@ var skipCount = 0;
 let right = `Right of Pass : ${kalanHak}`;
 document.querySelector(".card-footer .passRight").innerHTML = right;
 
-ui.btn_skip.addEventListener("click", function () {
-  if (kalanHak <= 0) {
-    kalanHak = 0;
-  } else {
-    kalanHak--;
-  }
-  let right = `Right of Pass : ${kalanHak}`;
-  document.querySelector(".card-footer .passRight").innerHTML = right;
 
+ui.btn_skip.addEventListener("click", function () {
+  
   if (quiz.sorular.length != quiz.soruIndex + 1) {
     skipCount++;
     if (skipCount <= 2) {
@@ -44,20 +39,37 @@ ui.btn_skip.addEventListener("click", function () {
       ui.soruGoster(quiz.soruGetir());
       ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
       
-      console.log(quiz.bosCevapSayisi += 1);
+      quiz.bosCevapSayisi += 1;
     } else {
       ui.wrong_skip.classList.remove("dissplayedWrong");
-      setTimeout(() => {
+        setTimeout(() => {
         ui.wrong_skip.classList.add("dissplayedWrong");
       }, 2000);
     }
   } else {
-    ui.quizBox.classList.add("dissplayedWrong")
-    ui.giris.style = "display : none"
-  }
+    if(kalanHak == 0){
+      ui.wrong_skip.classList.remove("dissplayedWrong");
+        setTimeout(() => {
+        ui.wrong_skip.classList.add("dissplayedWrong");
+      }, 2000);
+    }else{
+      ui.quizBox.classList.add("dissplayedWrong")
+      ui.giris.style = "display : none"
+      ui.contResult.classList.remove("deleteResult")
+      quiz.bosCevapSayisi += 1;
 
+    }
+  }
+  if (kalanHak <= 0) {
+      kalanHak = 0;
+    } else {
+      kalanHak--;
+    }
+    let right = `Right of Pass : ${kalanHak}`;
+    document.querySelector(".card-footer .passRight").innerHTML = right;
   ui.updateResultElement()
 });
+
 
 function optionSelected(option) {
   let cevap = option.querySelector("span b").textContent;
@@ -100,4 +112,3 @@ function optionSelected(option) {
   ui.btn_skip.classList.add("dissplaySkipBtn");
   ui.nextBtn.classList.remove("dissplayed");
 }
-

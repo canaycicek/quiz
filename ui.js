@@ -8,7 +8,7 @@ function UI() {
     this.btn_skip = document.querySelector(".btn_skip")
     this.wrong_skip = document.querySelector(".wrongSkip")
     this.giris = document.querySelector(".giris")
-    this.cont_result = document.querySelector(".cont_result")
+    this.contResult = document.querySelector(".contResult")
 }
 
 UI.prototype.soruGoster = function(soru) {

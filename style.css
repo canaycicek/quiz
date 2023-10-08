@@ -115,29 +115,29 @@ li{
 .passRight{
     font-style: italic;
 }
-.cont_result .card-head{
+.contResult .card-head{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.cont_result .card-body{
+.contResult .card-body{
     display: flex;
     flex-direction: column;
     row-gap: 4rem;
     text-align: center;
 }
-.cont_result .card-head h1{
+.contResult .card-head h1{
     font-weight: bold;
     font-size: 3rem;
 }
 .statu_quiz{
     font-size: 4rem;
 }
-.cont_result ul{
+.contResult ul{
     display: flex;
     row-gap: 1rem;
 }
-.cont_result ul li{
+.contRresult ul li{
     border: 1px solid black;
     border-radius: 1rem;
     padding: 10px;
@@ -150,6 +150,6 @@ li{
     background-color: rgb(255, 138, 138);
 }
 
-.delete_result{
+.deleteResult{
     display: none;
 }
