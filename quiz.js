@@ -4,7 +4,7 @@ function Quiz(sorular) {
     this.dogruCevapSayisi = 0
     this.yanlisCevapSayisi = 0
     this.bosCevapSayisi = 0
-    this.successStatus = " "
+    this.successStatus = ""
 }
 
 Quiz.prototype.soruGetir = function () {

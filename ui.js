@@ -10,6 +10,7 @@ function UI() {
     this.giris = document.querySelector(".giris"),
     this.contResult = document.querySelector(".contResult")
     this.timeCount = document.querySelector(".timer")
+    this.timeLine = document.querySelector(".timeLine")
 }
 
 UI.prototype.soruGoster = function(soru) {
@@ -52,11 +53,3 @@ UI.prototype.updateResultElement = function () {
     `
 }
 
-UI.prototype.ready = function () {
-    var progressBar = document.querySelector(".prgressBar")
-    var duration = 10000;
-  
-    progressBar.animate({ width: '100%' }, duration, function() {
-        
-    });
-}

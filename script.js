@@ -3,23 +3,28 @@ const ui = new UI();
 
 ui.startBtn.addEventListener("click", function () {
   ui.quizBox.classList.add("active");
+  ui.timeCount.innerText = `10`
   startTimer(9)
+  startProgress()
   ui.soruGoster(quiz.soruGetir());
   ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
   ui.giris.classList.add("girisDiss");
-  ui.ready()
 });
 
 ui.nextBtn.addEventListener("click", function () {
   if (quiz.sorular.length != quiz.soruIndex + 1) {
     quiz.soruIndex += 1;
+    ui.timeCount.innerText = `10`
+
     clearInterval(counter)
-    startTimer(10)
+    startTimer(9)
+    clearInterval(counterProgress)
+    startProgress()
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
-    ui.ready()
   } else {
     clearInterval(counter)
+    clearInterval(counterProgress)
     ui.quizBox.classList.add("dissplayedWrong")
     ui.giris.style = "display : none"
     ui.contResult.classList.remove("deleteResult")
@@ -38,14 +43,20 @@ document.querySelector(".card-footer .passRight").innerHTML = right;
 ui.btn_skip.addEventListener("click", function () {
   
   if (quiz.sorular.length != quiz.soruIndex + 1) {
-    clearInterval(counter)
-    startTimer(10)
+    if(kalanHak !== 0){
+          ui.timeCount.innerText = `10`
+
+          clearInterval(counter)
+          startTimer(9)
+          clearInterval(counterProgress)
+          startProgress()
+    }
+    
     skipCount++;
     if (skipCount <= 2) {
       quiz.soruIndex += 1;
       ui.soruGoster(quiz.soruGetir());
       ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
-      ui.ready()
       quiz.bosCevapSayisi += 1;
     } else {
       ui.wrong_skip.classList.remove("dissplayedWrong");
@@ -62,6 +73,9 @@ ui.btn_skip.addEventListener("click", function () {
     }else{
       clearInterval(counter)
       startTimer(10)
+      clearInterval(counterProgress)
+      startProgress()
+      
       ui.quizBox.classList.add("dissplayedWrong")
       ui.giris.style = "display : none"
       ui.contResult.classList.remove("deleteResult")
@@ -82,7 +96,7 @@ ui.btn_skip.addEventListener("click", function () {
 
 function optionSelected(option) {
   clearInterval(counter)
-  document.querySelector(".prgressBar").style = "width : 0px!important;"
+  clearInterval(counterProgress)
   let cevap = option.querySelector("span b").textContent;
   let soru = quiz.soruGetir();
   if (soru.cevabiKontrolEt(cevap)) {
@@ -106,7 +120,6 @@ function optionSelected(option) {
   }else{
     quiz.successStatus = "Success"
   }
-  ui.updateResultElement()
 
   if(quiz.successStatus == "Success"){
     document.querySelector(".unSuccessMessage").classList.add("dissplayedWrong")
@@ -119,6 +132,8 @@ function optionSelected(option) {
     document.querySelector(".themeSelect").classList.add("failed_result")
     document.querySelector(".themeSelect").classList.remove("success_result")
   }
+  ui.updateResultElement()
+
   ui.btn_skip.classList.add("dissplaySkipBtn");
   ui.nextBtn.classList.remove("dissplayed");
 }
@@ -143,10 +158,26 @@ function startTimer(time) {
           option.insertAdjacentHTML("beforeend", ui.correctIcon);
           ui.btn_skip.classList.add("dissplaySkipBtn");
           ui.nextBtn.classList.remove("dissplayed");
-          quiz.bosCevapSayisi += 1;
-          option.classList.add("diabled")
         }
+        option.classList.add("disabled")
       }
     }
   }
+}
+
+let counterProgress;
+function startProgress(){
+  let lineWidth = 0
+
+  counterProgress = setInterval(timerProgress, 18);
+
+  function timerProgress() {
+    lineWidth += 1;
+    ui.timeLine.style.width = lineWidth + "px";
+    if(lineWidth > 565){
+      clearInterval(counterProgress)
+      quiz.yanlisCevapSayisi += 1;
+    }
+  }
+  
 }
